@@ -20,5 +20,6 @@ export const useCartStore = defineStore("cart", {
       this.items = [];
     },
   },
+  // Menyimpan state ke localStorage agar tetap ada setelah refresh
   persist: true,
 });

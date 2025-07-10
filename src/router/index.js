@@ -5,9 +5,11 @@ import Dashboard from "../views/Dashboard.vue";
 import { useUserStore } from "../stores/user";
 
 const routes = [
-  { path: "/", redirect: "/dashboard/home" }, // <-- ini yang diganti
+  { path: "/", redirect: "/dashboard/home" },
+
   { path: "/register", name: "Register", component: Register },
   { path: "/login", name: "Login", component: Login },
+
   {
     path: "/dashboard",
     component: Dashboard,
@@ -16,12 +18,18 @@ const routes = [
       { path: "", redirect: "home" },
       { path: "home", component: () => import("../views/Home.vue") },
       { path: "katalog", component: () => import("../views/Katalog.vue") },
+      {
+        path: "senjata/:id",
+        component: () => import("../views/SenjataDetail.vue"),
+        props: true,
+      },
       { path: "keranjang", component: () => import("../views/Keranjang.vue") },
       { path: "riwayat", component: () => import("../views/Riwayat.vue") },
       { path: "profil", component: () => import("../views/Profil.vue") },
     ],
   },
-  { path: "/home", redirect: "/dashboard/home" }, // (optional) biar gak salah ketik
+
+  { path: "/home", redirect: "/dashboard/home" }, // optional typo‑helper
 ];
 
 const router = createRouter({
@@ -29,9 +37,10 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const userStore = useUserStore();
   userStore.loadUser();
+
   if (to.meta.requiresAuth && !userStore.user) {
     next("/login");
   } else if (

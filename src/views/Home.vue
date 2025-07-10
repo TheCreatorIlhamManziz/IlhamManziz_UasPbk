@@ -1,67 +1,67 @@
 <template>
-    <div class="home-page">
-      <!-- Hero Section -->
-      <section class="hero">
-        <h1>Aplikasi Toko Senjata</h1>
-        <p>🔥 Diskon 20% Senjata Premium Hari Ini!</p>
-      </section>
-  
-      <!-- Daftar Senjata Terbaru -->
-      <section class="senjata-section">
-        <h2>Senjata Terbaru</h2>
-        <div class="senjata-grid">
-          <SenjataCard
-            v-for="item in senjataList"
-            :key="item.id"
-            :senjata="item"
-          />
-        </div>
-      </section>
-  
-      <!-- Tombol ke Katalog -->
-      <div class="lihat-semua">
-        <RouterLink to="/dashboard/katalog" class="btn-lihat">
-          Lihat Semua Senjata →
-        </RouterLink>
+  <div class="home-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Aplikasi Toko Senjata</h1>
+      <p>🔥 Diskon 20% Senjata Premium Hari Ini!</p>
+    </section>
+
+    <!-- Daftar Senjata Terbaru -->
+    <section class="senjata-section">
+      <h2>Senjata Terbaru</h2>
+      <div class="senjata-grid">
+        <SenjataCard
+          v-for="item in senjataList"
+          :key="item.id"
+          :senjata="item"
+        />
       </div>
-  
-      <!-- Tentang Kami -->
-      <section class="tentang">
-        <h3>Tentang Kami</h3>
-        <p>
-          Toko Senjata Digital terbaik yang menyediakan berbagai jenis senjata
-          untuk kebutuhan simulasi, game, dan koleksi. Kami tidak menjual senjata
-          sungguhan.
-        </p>
-      </section>
+    </section>
+
+    <!-- Tombol ke Katalog -->
+    <div class="lihat-semua">
+      <RouterLink to="/dashboard/katalog" class="btn-lihat">
+        Lihat Semua Senjata →
+      </RouterLink>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
-  import { db } from '../firebase'
-  import SenjataCard from '../components/SenjataCard.vue'
-  
-  const senjataList = ref([])
-  
-  const fetchSenjata = async () => {
-    const q = query(
-      collection(db, 'senjata'),
-      orderBy('created_at', 'desc'),
-      limit(6)
-    )
-    const snapshot = await getDocs(q)
-    senjataList.value = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-  }
-  
-  onMounted(() => {
-    fetchSenjata()
-  })
-  </script>
+
+    <!-- Tentang Kami -->
+    <section class="tentang">
+      <h3>Tentang Kami</h3>
+      <p>
+        Toko Senjata Digital terbaik yang menyediakan berbagai jenis senjata
+        untuk kebutuhan simulasi, game, dan koleksi. Kami tidak menjual senjata
+        sungguhan.
+      </p>
+    </section>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
+import { db } from '../firebase'
+import SenjataCard from '../components/SenjataCard.vue'
+
+const senjataList = ref([])
+
+const fetchSenjata = async () => {
+  const q = query(
+    collection(db, 'senjata'),
+    orderBy('created_at', 'desc'),
+    limit(6)
+  )
+  const snapshot = await getDocs(q)
+  senjataList.value = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
+}
+
+onMounted(() => {
+  fetchSenjata()
+})
+</script>
   
   <style scoped>
   .home-page {
