@@ -1,5 +1,53 @@
-# Vue 3 + Vite
+# 🛒 Aplikasi Katalog & Pemesanan Senjata
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Aplikasi Vue 3 modern bergaya hacker yang memungkinkan pengguna untuk:
+- Melihat katalog senjata
+- Menambahkan ke keranjang
+- Melakukan pemesanan (simulasi COD)
+- Melihat riwayat pengiriman
+- Mengelola profil pengguna lengkap dengan foto dan lokasi via Google Maps
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+---
+
+## 🚀 Fitur Utama
+
+### 📦 Katalog
+- Menampilkan daftar senjata lengkap
+- Harga diskon ditampilkan jika tersedia
+- Ikon 🔥 untuk diskon spesial
+
+### 🛒 Keranjang Belanja
+- Tambahkan senjata ke keranjang
+- Lihat total harga
+- Hapus item dari keranjang
+- Lanjutkan pemesanan (simulasi COD)
+
+### 📜 Riwayat Pesanan
+- Lihat daftar pesanan yang sudah dibuat
+- Menampilkan status dan lokasi tujuan
+- Dapat dibatalkan
+- Estimasi waktu pengiriman (simulasi)
+
+### 👤 Profil Pengguna
+- Edit nama, email (readonly), deskripsi, dan lokasi
+- Upload foto profil langsung dari perangkat
+- Lokasi otomatis ditampilkan via Google Maps
+- Data profil disimpan permanen di localStorage
+
+---
+
+## 🧠 Teknologi yang Digunakan
+
+| Teknologi  | Keterangan                            |
+|------------|----------------------------------------|
+| Vue 3 + Vite | Framework utama SPA                  |
+| Pinia      | Manajemen state global (keranjang & order) |
+| Vue Router | Navigasi antar halaman                 |
+| localStorage | Menyimpan profil & riwayat pesanan  |
+| Google Maps Embed | Menampilkan lokasi pengguna     |
+
+---
+
+## 🗂️ Struktur Folder Penting
+
+
