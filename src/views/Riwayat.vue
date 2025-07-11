@@ -14,23 +14,26 @@
       <p><strong>Status:</strong> {{ order.status }}</p>
       <p><strong>Lokasi:</strong> {{ order.lokasi }}</p>
       <p><strong>Waktu:</strong> {{ order.waktu }}</p>
-      <button @click="batalkan(order.id)">❌ Batalkan</button>
+      <button v-if="order.status !== 'Dibatalkan'" @click="batalkan(order.id)">❌ Batalkan</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useOrderStore } from '../stores/order'
-import { computed } from 'vue'
+import { onMounted, computed } from 'vue'
 
 const orderStore = useOrderStore()
 
-// computed agar reactive
-const orders = computed(() => orderStore.orders)
+onMounted(() => {
+  orderStore.fetchOrders()
+})
 
 function batalkan(id) {
-  orderStore.hapusOrder(id) // kita ubah ke metode hapus, bukan ubah status
+  orderStore.cancelOrder(id)
 }
+
+const orders = computed(() => orderStore.orders)
 </script>
 
 <style scoped>
